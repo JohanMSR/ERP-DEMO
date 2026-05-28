@@ -43,9 +43,10 @@ services:
       - "traefik.http.services.elantar-service.loadbalancer.server.port=3000"
     environment:
       - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:5500/api}
+      - DANGEROUSLY_DISABLE_HOST_CHECK=${DANGEROUSLY_DISABLE_HOST_CHECK:-true}
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
-      - WDS_SOCKET_PORT=0
+      - WDS_SOCKET_PORT=${WDS_SOCKET_PORT:-0}
     depends_on:
       - backend
     networks:
