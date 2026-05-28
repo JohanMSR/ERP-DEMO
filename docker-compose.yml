@@ -3,7 +3,6 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: ${BACKEND_CONTAINER_NAME:-elantar-backend}
     ports:
       - "${BACKEND_HOST_PORT:-5500}:5000"
     volumes:
@@ -30,7 +29,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    container_name: ${FRONTEND_CONTAINER_NAME:-elantar-frontend}
     ports:
       - "${FRONTEND_HOST_PORT:-5066}:3000"
     volumes:
