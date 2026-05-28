@@ -23,7 +23,7 @@ services:
       - "traefik.http.routers.elantar-api.service=elantar-api-service"
       - "traefik.http.services.elantar-api-service.loadbalancer.server.port=5000"
     networks:
-      - elantar_net
+      - erp_net
     restart: unless-stopped
 
   frontend:
@@ -51,7 +51,7 @@ services:
     depends_on:
       - backend
     networks:
-      - elantar_net
+      - erp_net
     restart: unless-stopped
 
 volumes:
@@ -59,6 +59,6 @@ volumes:
   backend_instance:
 
 networks:
-  elantar_net:
-    name: ${NETWORK_NAME:-elantar_net}
+  erp_net:
+    name: ${NETWORK_NAME:-erp_net}
     external: ${NETWORK_EXTERNAL:-false}
