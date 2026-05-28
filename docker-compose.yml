@@ -1,0 +1,64 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ${BACKEND_CONTAINER_NAME:-elantar-backend}
+    ports:
+      - "${BACKEND_HOST_PORT:-5500}:5000"
+    volumes:
+      - backend_data:/app/data
+      - backend_instance:/app/instance
+      - ./backend:/app
+    environment:
+      - FLASK_ENV=${FLASK_ENV:-development}
+      - FLASK_APP=${FLASK_APP:-run.py}
+      - SECRET_KEY=${SECRET_KEY:-ec35bc647814054a2b8aac909aa1b240c1e754b1a228ea6d2728f338cb34f1bd}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:5066}
+      - CREATE_TEST_DATA=${CREATE_TEST_DATA:-false}
+    labels:
+      - "traefik.enable=${TRAEFIK_ENABLE:-false}"
+      - "traefik.http.routers.elantar-api.entrypoints=web"
+      - "traefik.http.routers.elantar-api.rule=Host(`${TRAEFIK_HOST:-localhost}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.elantar-api.service=elantar-api-service"
+      - "traefik.http.services.elantar-api-service.loadbalancer.server.port=5000"
+    networks:
+      - elantar_net
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: ${FRONTEND_CONTAINER_NAME:-elantar-frontend}
+    ports:
+      - "${FRONTEND_HOST_PORT:-5066}:3000"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - /app/node_modules
+    labels:
+      - "traefik.enable=${TRAEFIK_ENABLE:-false}"
+      - "traefik.http.routers.elantar-web.entrypoints=web"
+      - "traefik.http.routers.elantar-web.rule=Host(`${TRAEFIK_HOST:-localhost}`)"
+      - "traefik.http.routers.elantar-web.service=elantar-service"
+      - "traefik.http.services.elantar-service.loadbalancer.server.port=3000"
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:5500/api}
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - WDS_SOCKET_PORT=0
+    depends_on:
+      - backend
+    networks:
+      - elantar_net
+    restart: unless-stopped
+
+volumes:
+  backend_data:
+  backend_instance:
+
+networks:
+  elantar_net:
+    name: ${NETWORK_NAME:-elantar_net}
+    external: ${NETWORK_EXTERNAL:-false}

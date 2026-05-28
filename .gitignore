@@ -1,0 +1,137 @@
+# ---- Node / Frontend ----
+# Dependencies
+frontend/node_modules/
+node_modules/
+
+# Build outputs
+frontend/.next/
+frontend/dist/
+frontend/build/
+frontend/.parcel-cache/
+frontend/.vite/
+frontend/.cache/
+
+dist/
+build/
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# Env files
+frontend/.env*
+!.env.example
+!frontend/.env.example
+
+# ---- Python / Backend ----
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Alembic
+backend/migrations/versions/__pycache__/
+
+# Virtual environments
+backend/.venv/
+.venv/
+venv/
+ENV/
+env/
+backend/env/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.pyre/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+backend/instance/
+backend/*.db
+backend/*.sqlite3
+backend/instance/*.db
+backend/instance/*.db-journal
+backend/instance/referral_program_backup_*.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# ---- OS / Editors ----
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+check_repo_cleanliness.sh
+*~
+
+# ---- Misc ----
+# Logs
+*.log
+logs/

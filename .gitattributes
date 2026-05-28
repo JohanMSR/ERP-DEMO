@@ -1,0 +1,32 @@
+# Normalize line endings to LF in repo; Git will handle working dir per core.autocrlf
+* text=auto eol=lf
+
+# Treat these as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.db binary
+*.sqlite3 binary
+
+# Improve diffs for common text formats
+*.md text diff=markdown
+*.css text
+*.scss text
+*.sass text
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.html text eol=lf
+*.py text eol=lf
+
+# Lock files should be normalized as text
+package-lock.json text eol=lf
+frontend/package-lock.json text eol=lf
